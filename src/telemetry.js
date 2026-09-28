@@ -1,10 +1,14 @@
-const HARDCODED_FALLBACK_HOST = "https://a.kunchenguid.com";
+const HARDCODED_FALLBACK_HOST = "";
 const UMAMI_PATH = "/api/send";
 const DEFAULT_HOSTNAME = "cli";
 const DEFAULT_TITLE = "Lavish Editor CLI";
 const DEFAULT_REQUEST_TIMEOUT_MS = 1_000;
 
 export function resolveTelemetryConfig(input) {
+  // Local policy: telemetry is hard-disabled. Never post events to a.kunchenguid.com.
+  return { enabled: false, host: "", websiteID: "" };
+
+  // eslint-disable-next-line no-unreachable
   const optOut = String(input.env.LAVISH_AXI_TELEMETRY || "")
     .trim()
     .toLowerCase();
